@@ -42,49 +42,6 @@ set(f,'position',[400 400 240 130]);
 uit = uitable(f,'Data',centers,'Position',[20 20 200 100],'Columnname',column_name,'Rowname',row_name);
 
 % 通过knn对图片季节类型进行识别
+% setupKnn(20, centers);
 setupKnn(20);
-
-% 单独获取训练集中每一种图片的色调数据
-% sprintImgHue = getDirImagesHue(sprintPicsPath);
-% summerImgHue = getDirImagesHue(summerPicsPath);
-% autumnImgHue = getDirImagesHue(automnPicsPath);
-% winterImgHue = getDirImagesHue(winterPicsPath);
-% disp(sprintImgHue);
-% 
-% 
-% sprintTestPicsPath = '/Users/lijiehong/Desktop/dm/训练+测试/测试集/春天/';
-% summerTestPicsPath = '/Users/lijiehong/Desktop/dm/训练+测试/测试集/夏天/';
-% autumnTestPicsPath = '/Users/lijiehong/Desktop/dm/训练+测试/测试集/秋天/';
-% winterTestPicsPath = '/Users/lijiehong/Desktop/dm/训练+测试/测试集/冬天/';
-% 
-% % 获取测试集图片色调数据
-% sprintTestPics = getDirImagesHue(sprintTestPicsPath);
-% summerTestPics = getDirImagesHue(summerTestPicsPath);
-% autumnTestPics = getDirImagesHue(autumnTestPicsPath);
-% winterTestPics = getDirImagesHue(winterTestPicsPath);
-% 
-% trainData(:,:,1) = sprintImgHue;
-% trainData(:,:,2) = summerImgHue;
-% trainData(:,:,3) = autumnImgHue;
-% trainData(:,:,4) = winterImgHue;
-% trainDim=size(trainData);
-% 
-% for i=1:length(sprintTestPics)
-%     testData=sprintTestPics(i,:);
-% end
-% 
-% function result = getDirImagesHue(picsPath)
-%     result = [];
-%     imgPathList = dir([picsPath '*.jpg']);
-%     if ~isempty(imgPathList)
-%         for i = 1:length(imgPathList)
-%             image_name = imgPathList(i).name;
-%             image =  imread(strcat(picsPath,image_name));
-%             hsva = rgb2hsv(image);
-%             h = hsva(:,:,1);
-%             result = [result;[mean(h, 'all'), std(h, 1, 'all')]];
-%         end
-%     end
-% end
-
 

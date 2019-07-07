@@ -1,5 +1,5 @@
 
-function setupKnn(K)
+function setupKnn(K, centers)
     sprintPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/¥∫ÃÏ/';
     summerPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/œƒÃÏ/';
     automnPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/«ÔÃÏ/';
@@ -35,6 +35,11 @@ function setupKnn(K)
     knn(len, K, summerTestPics, 2);
     knn(len, K, autumnTestPics, 3);
     knn(len, K, winterTestPics, 4);
+    
+%     knnWithKmeansCenters(centers, sprintTestPics, 1);
+%     knnWithKmeansCenters(centers, summerTestPics, 2);
+%     knnWithKmeansCenters(centers, autumnTestPics, 3);
+%     knnWithKmeansCenters(centers, winterTestPics, 4);
 end
 
 function result = getDirImagesHue(picsPath)
@@ -49,6 +54,28 @@ function result = getDirImagesHue(picsPath)
             result = [result;[mean(h, 'all'), std(h, 1, 'all')]];
         end
     end
+end
+
+function knnWithKmeansCenters(centers, testPics, correctType)
+    fprintf('total test cases: %d\n', length(testPics));
+    correctCount = 0;
+    for i=1:length(testPics)
+        testData=testPics(i,:);
+        lastDist = Inf;
+        idx = 0;
+        for j=1:4 
+            distance = pdist([testData;centers(j, :)]);
+            if distance < lastDist
+                lastDist = distance;
+                idx = j;
+            end
+        end
+        if idx == correctType
+            correctCount = correctCount + 1;
+        end
+    end
+    fprintf('correct cases: %d\n', correctCount);
+    fprintf('Recognition rate: %.2f\n', correctCount/length(testPics));
 end
 
 function knn(trainLen, K, testPics, correctType)
@@ -111,7 +138,7 @@ function knn(trainLen, K, testPics, correctType)
             correctCount = correctCount + 1;
         end
     end
-    
     fprintf('correct cases: %d\n', correctCount);
+    fprintf('Recognition rate: %.2f\n', correctCount/length(testPics));
 end
 
