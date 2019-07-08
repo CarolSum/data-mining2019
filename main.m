@@ -39,7 +39,7 @@ disp(centers);
 column_name=["色调均值", "色调标准差"];
 f = figure;
 set(f,'position',[400 400 240 130]);
-uit = uitable(f,'Data',centers,'Position',[20 20 200 100],'Columnname',column_name,'Rowname',row_name);
+uitable(f,'Data',centers,'Position',[20 20 200 100],'Columnname',column_name,'Rowname',row_name);
 
 % 通过knn对图片季节类型进行识别
 % setupKnn(20, centers);
@@ -48,4 +48,4 @@ data = setupKnn(1);
 column_name=["样本数", "正确识别数", "准确率"];
 f = figure;
 set(f,'position',[500 500 300 160]);
-uit = uitable(f,'Data',data,'Position',[20 20 260 130],'Columnname',column_name,'Rowname',row_name);
+uitable(f,'Data',data,'Position',[20 20 260 130],'Columnname',column_name,'Rowname',row_name);
