@@ -1,5 +1,5 @@
 
-function setupKnn(K, centers)
+function data = setupKnn(K, centers)
     sprintPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/¥∫ÃÏ/';
     summerPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/œƒÃÏ/';
     automnPicsPath = '/Users/lijiehong/Desktop/dm/—µ¡∑+≤‚ ‘/«ÔÃÏ/';
@@ -31,10 +31,15 @@ function setupKnn(K, centers)
 
     disp(trainDim);
     len = length(sprintImgHue);
-    knn(len, K, sprintTestPics, 1);
-    knn(len, K, summerTestPics, 2);
-    knn(len, K, autumnTestPics, 3);
-    knn(len, K, winterTestPics, 4);
+    data = [];
+    res = knn(len, K, sprintTestPics, 1);
+    data = [data; res];
+    res = knn(len, K, summerTestPics, 2);
+    data = [data; res];
+    res = knn(len, K, autumnTestPics, 3);
+    data = [data; res];
+    res = knn(len, K, winterTestPics, 4);
+    data = [data; res];
     
 %     knnWithKmeansCenters(centers, sprintTestPics, 1);
 %     knnWithKmeansCenters(centers, summerTestPics, 2);
@@ -78,7 +83,7 @@ function knnWithKmeansCenters(centers, testPics, correctType)
     fprintf('Recognition rate: %.2f\n', correctCount/length(testPics));
 end
 
-function knn(trainLen, K, testPics, correctType)
+function res = knn(trainLen, K, testPics, correctType)
     global trainData;
     correctCount = 0;
     fprintf('total test cases: %d\n', length(testPics));
@@ -140,5 +145,6 @@ function knn(trainLen, K, testPics, correctType)
     end
     fprintf('correct cases: %d\n', correctCount);
     fprintf('Recognition rate: %.2f\n', correctCount/length(testPics));
+    res = [length(testPics), correctCount, correctCount/length(testPics)];
 end
 
